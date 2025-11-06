@@ -63,7 +63,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             correct_answers = body_data['correct_answers']
             prepositions = body_data['prepositions']
             score_percentage = body_data['score_percentage']
-            answers = json.dumps(body_data['answers'])
+            answers_list = body_data['answers']
+            answers = json.dumps(answers_list)
             
             cur.execute("""
                 INSERT INTO test_results 
@@ -73,12 +74,78 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             """, (total_questions, correct_answers, prepositions, score_percentage, answers))
             
             result = cur.fetchone()
+            
+            for answer in answers_list:
+                if 'ruleType' in answer:
+                    rule_type = answer['ruleType']
+                    preposition = answer['correctAnswer']
+                    is_correct = answer['correct']
+                    sentence = answer['sentence']
+                    
+                    cur.execute("""
+                        INSERT INTO rule_statistics 
+                        (preposition, rule_type, total_attempts, correct_attempts, accuracy_percentage)
+                        VALUES (%s, %s, 1, %s, %s)
+                        ON CONFLICT (user_session, preposition, rule_type) 
+                        DO UPDATE SET 
+                            total_attempts = rule_statistics.total_attempts + 1,
+                            correct_attempts = rule_statistics.correct_attempts + %s,
+                            accuracy_percentage = ROUND((rule_statistics.correct_attempts + %s)::numeric / (rule_statistics.total_attempts + 1) * 100),
+                            last_attempt_date = CURRENT_TIMESTAMP
+                    """, (preposition, rule_type, 1 if is_correct else 0, 100 if is_correct else 0, 
+                          1 if is_correct else 0, 1 if is_correct else 0))
+                    
+                    if not is_correct:
+                        cur.execute("""
+                            INSERT INTO error_patterns 
+                            (preposition, rule_type, sentence, error_count)
+                            VALUES (%s, %s, %s, 1)
+                            ON CONFLICT (user_session, preposition, rule_type)
+                            DO UPDATE SET 
+                                error_count = error_patterns.error_count + 1,
+                                sentence = %s,
+                                last_error_date = CURRENT_TIMESTAMP
+                        """, (preposition, rule_type, sentence, sentence))
+            
             conn.commit()
             
             return {
                 'statusCode': 200,
                 'headers': headers,
                 'body': json.dumps({'id': result['id'], 'success': True}),
+                'isBase64Encoded': False
+            }
+        
+        elif action == 'get_rule_stats' and method == 'GET':
+            cur.execute("""
+                SELECT preposition, rule_type, total_attempts, correct_attempts, accuracy_percentage
+                FROM rule_statistics 
+                WHERE user_session = 'default'
+                ORDER BY accuracy_percentage ASC, total_attempts DESC
+            """)
+            results = cur.fetchall()
+            
+            return {
+                'statusCode': 200,
+                'headers': headers,
+                'body': json.dumps(results, default=str),
+                'isBase64Encoded': False
+            }
+        
+        elif action == 'get_error_patterns' and method == 'GET':
+            cur.execute("""
+                SELECT preposition, rule_type, error_count, sentence
+                FROM error_patterns 
+                WHERE user_session = 'default'
+                ORDER BY error_count DESC
+                LIMIT 20
+            """)
+            results = cur.fetchall()
+            
+            return {
+                'statusCode': 200,
+                'headers': headers,
+                'body': json.dumps(results, default=str),
                 'isBase64Encoded': False
             }
         

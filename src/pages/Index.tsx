@@ -14,29 +14,35 @@ interface Exercise {
   sentence: string;
   correctAnswer: 'at' | 'on' | 'in';
   options: Array<'at' | 'on' | 'in'>;
+  ruleType: string;
 }
 
 const allExercises: Exercise[] = [
-  { id: 1, sentence: 'I wake up ___ 7 AM every day', correctAnswer: 'at', options: ['at', 'on', 'in'] },
-  { id: 2, sentence: 'My birthday is ___ March', correctAnswer: 'in', options: ['at', 'on', 'in'] },
-  { id: 3, sentence: 'We have a meeting ___ Monday', correctAnswer: 'on', options: ['at', 'on', 'in'] },
-  { id: 4, sentence: 'The concert starts ___ midnight', correctAnswer: 'at', options: ['at', 'on', 'in'] },
-  { id: 5, sentence: 'She was born ___ 1995', correctAnswer: 'in', options: ['at', 'on', 'in'] },
-  { id: 6, sentence: 'Let\'s meet ___ Friday afternoon', correctAnswer: 'on', options: ['at', 'on', 'in'] },
-  { id: 7, sentence: 'I go to the gym ___ the evening', correctAnswer: 'in', options: ['at', 'on', 'in'] },
-  { id: 8, sentence: 'The store closes ___ 9 PM', correctAnswer: 'at', options: ['at', 'on', 'in'] },
-  { id: 9, sentence: 'We usually travel ___ summer', correctAnswer: 'in', options: ['at', 'on', 'in'] },
-  { id: 10, sentence: 'The exam is ___ December 15th', correctAnswer: 'on', options: ['at', 'on', 'in'] },
-  { id: 11, sentence: 'Classes start ___ September', correctAnswer: 'in', options: ['at', 'on', 'in'] },
-  { id: 12, sentence: 'The movie starts ___ 8:30 PM', correctAnswer: 'at', options: ['at', 'on', 'in'] },
-  { id: 13, sentence: 'We celebrate ___ New Year\'s Eve', correctAnswer: 'on', options: ['at', 'on', 'in'] },
-  { id: 14, sentence: 'I was born ___ 2000', correctAnswer: 'in', options: ['at', 'on', 'in'] },
-  { id: 15, sentence: 'The shop opens ___ sunrise', correctAnswer: 'at', options: ['at', 'on', 'in'] },
-  { id: 16, sentence: 'We go skiing ___ winter', correctAnswer: 'in', options: ['at', 'on', 'in'] },
-  { id: 17, sentence: 'The party is ___ Saturday night', correctAnswer: 'on', options: ['at', 'on', 'in'] },
-  { id: 18, sentence: 'I study ___ the afternoon', correctAnswer: 'in', options: ['at', 'on', 'in'] },
-  { id: 19, sentence: 'We meet ___ noon for lunch', correctAnswer: 'at', options: ['at', 'on', 'in'] },
-  { id: 20, sentence: 'Her wedding is ___ June 20th', correctAnswer: 'on', options: ['at', 'on', 'in'] },
+  { id: 1, sentence: 'I wake up ___ 7 AM every day', correctAnswer: 'at', options: ['at', 'on', 'in'], ruleType: 'at_exact_time' },
+  { id: 2, sentence: 'My birthday is ___ March', correctAnswer: 'in', options: ['at', 'on', 'in'], ruleType: 'in_month' },
+  { id: 3, sentence: 'We have a meeting ___ Monday', correctAnswer: 'on', options: ['at', 'on', 'in'], ruleType: 'on_day_of_week' },
+  { id: 4, sentence: 'The concert starts ___ midnight', correctAnswer: 'at', options: ['at', 'on', 'in'], ruleType: 'at_exact_time' },
+  { id: 5, sentence: 'She was born ___ 1995', correctAnswer: 'in', options: ['at', 'on', 'in'], ruleType: 'in_year' },
+  { id: 6, sentence: 'Let\'s meet ___ Friday afternoon', correctAnswer: 'on', options: ['at', 'on', 'in'], ruleType: 'on_day_part' },
+  { id: 7, sentence: 'I go to the gym ___ the evening', correctAnswer: 'in', options: ['at', 'on', 'in'], ruleType: 'in_part_of_day' },
+  { id: 8, sentence: 'The store closes ___ 9 PM', correctAnswer: 'at', options: ['at', 'on', 'in'], ruleType: 'at_exact_time' },
+  { id: 9, sentence: 'We usually travel ___ summer', correctAnswer: 'in', options: ['at', 'on', 'in'], ruleType: 'in_season' },
+  { id: 10, sentence: 'The exam is ___ December 15th', correctAnswer: 'on', options: ['at', 'on', 'in'], ruleType: 'on_exact_date' },
+  { id: 11, sentence: 'Classes start ___ September', correctAnswer: 'in', options: ['at', 'on', 'in'], ruleType: 'in_month' },
+  { id: 12, sentence: 'The movie starts ___ 8:30 PM', correctAnswer: 'at', options: ['at', 'on', 'in'], ruleType: 'at_exact_time' },
+  { id: 13, sentence: 'We celebrate ___ New Year\'s Eve', correctAnswer: 'on', options: ['at', 'on', 'in'], ruleType: 'on_exact_date' },
+  { id: 14, sentence: 'I was born ___ 2000', correctAnswer: 'in', options: ['at', 'on', 'in'], ruleType: 'in_year' },
+  { id: 15, sentence: 'The shop opens ___ sunrise', correctAnswer: 'at', options: ['at', 'on', 'in'], ruleType: 'at_moment' },
+  { id: 16, sentence: 'We go skiing ___ winter', correctAnswer: 'in', options: ['at', 'on', 'in'], ruleType: 'in_season' },
+  { id: 17, sentence: 'The party is ___ Saturday night', correctAnswer: 'on', options: ['at', 'on', 'in'], ruleType: 'on_day_part' },
+  { id: 18, sentence: 'I study ___ the afternoon', correctAnswer: 'in', options: ['at', 'on', 'in'], ruleType: 'in_part_of_day' },
+  { id: 19, sentence: 'We meet ___ noon for lunch', correctAnswer: 'at', options: ['at', 'on', 'in'], ruleType: 'at_exact_time' },
+  { id: 20, sentence: 'Her wedding is ___ June 20th', correctAnswer: 'on', options: ['at', 'on', 'in'], ruleType: 'on_exact_date' },
+  { id: 21, sentence: 'I\'ll see you ___ Christmas', correctAnswer: 'at', options: ['at', 'on', 'in'], ruleType: 'at_holiday' },
+  { id: 22, sentence: 'The meeting is ___ Tuesday morning', correctAnswer: 'on', options: ['at', 'on', 'in'], ruleType: 'on_day_part' },
+  { id: 23, sentence: 'She graduated ___ 2019', correctAnswer: 'in', options: ['at', 'on', 'in'], ruleType: 'in_year' },
+  { id: 24, sentence: 'We arrived ___ night', correctAnswer: 'at', options: ['at', 'on', 'in'], ruleType: 'at_moment' },
+  { id: 25, sentence: 'The conference is ___ April', correctAnswer: 'in', options: ['at', 'on', 'in'], ruleType: 'in_month' },
 ];
 
 const rules = {
@@ -45,7 +51,7 @@ const rules = {
   in: ['Месяцы: in January', 'Годы: in 2024', 'Части дня: in the morning, in the evening', 'Сезоны: in summer']
 };
 
-type View = 'home' | 'settings' | 'exercise' | 'results' | 'statistics' | 'progress';
+type View = 'home' | 'settings' | 'exercise' | 'results' | 'statistics' | 'progress' | 'weaknesses';
 
 interface TestResult {
   id: number;
@@ -55,6 +61,34 @@ interface TestResult {
   score_percentage: number;
   prepositions: string[];
 }
+
+interface RuleStats {
+  preposition: string;
+  rule_type: string;
+  total_attempts: number;
+  correct_attempts: number;
+  accuracy_percentage: number;
+}
+
+interface ErrorPattern {
+  preposition: string;
+  rule_type: string;
+  error_count: number;
+  sentence: string;
+}
+
+const ruleTypeNames: Record<string, string> = {
+  'at_exact_time': 'AT - Точное время (7 PM, noon)',
+  'at_moment': 'AT - Моменты дня (night, sunrise)',
+  'at_holiday': 'AT - Праздники (Christmas, Easter)',
+  'on_day_of_week': 'ON - Дни недели (Monday, Friday)',
+  'on_exact_date': 'ON - Точные даты (March 15th)',
+  'on_day_part': 'ON - День недели + часть дня (Monday morning)',
+  'in_month': 'IN - Месяцы (January, March)',
+  'in_year': 'IN - Годы (2024, 1995)',
+  'in_part_of_day': 'IN - Части дня (morning, evening)',
+  'in_season': 'IN - Сезоны (summer, winter)'
+};
 
 export default function Index() {
   const [view, setView] = useState<View>('home');
@@ -67,11 +101,16 @@ export default function Index() {
   const [selectedPrepositions, setSelectedPrepositions] = useState<Array<'at' | 'on' | 'in'>>(['at', 'on', 'in']);
   const [questionCount, setQuestionCount] = useState(10);
   const [statistics, setStatistics] = useState<TestResult[]>([]);
+  const [ruleStats, setRuleStats] = useState<RuleStats[]>([]);
+  const [errorPatterns, setErrorPatterns] = useState<ErrorPattern[]>([]);
   const [loading, setLoading] = useState(false);
+  const [smartMode, setSmartMode] = useState(false);
 
   useEffect(() => {
     if (view === 'statistics' || view === 'progress') {
       loadStatistics();
+    } else if (view === 'weaknesses') {
+      loadWeaknesses();
     }
   }, [view]);
 
@@ -91,8 +130,38 @@ export default function Index() {
     setLoading(false);
   };
 
+  const loadWeaknesses = async () => {
+    setLoading(true);
+    try {
+      const [statsResponse, errorsResponse] = await Promise.all([
+        fetch(`${API_URL}?action=get_rule_stats`),
+        fetch(`${API_URL}?action=get_error_patterns`)
+      ]);
+      
+      if (statsResponse.ok) {
+        const data = await statsResponse.json();
+        setRuleStats(data);
+      }
+      if (errorsResponse.ok) {
+        const data = await errorsResponse.json();
+        setErrorPatterns(data);
+      }
+    } catch (error) {
+      console.error('Failed to load weaknesses:', error);
+    }
+    setLoading(false);
+  };
+
   const saveResult = async () => {
     try {
+      const detailedAnswers = answers.map(a => ({
+        sentence: a.exercise.sentence,
+        correct: a.correct,
+        answer: a.answer,
+        correctAnswer: a.exercise.correctAnswer,
+        ruleType: a.exercise.ruleType
+      }));
+
       await fetch(`${API_URL}?action=save_result`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -101,12 +170,7 @@ export default function Index() {
           correct_answers: score,
           prepositions: selectedPrepositions,
           score_percentage: Math.round((score / exercises.length) * 100),
-          answers: answers.map(a => ({
-            sentence: a.exercise.sentence,
-            correct: a.correct,
-            answer: a.answer,
-            correctAnswer: a.exercise.correctAnswer
-          }))
+          answers: detailedAnswers
         })
       });
     } catch (error) {
@@ -116,6 +180,53 @@ export default function Index() {
 
   const goToSettings = () => {
     setView('settings');
+  };
+
+  const startSmartTraining = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_URL}?action=get_rule_stats`);
+      if (response.ok) {
+        const stats: RuleStats[] = await response.json();
+        
+        const weakRules = stats
+          .filter(s => s.accuracy_percentage < 70 && s.total_attempts >= 2)
+          .sort((a, b) => a.accuracy_percentage - b.accuracy_percentage)
+          .slice(0, 5)
+          .map(s => s.rule_type);
+        
+        let selectedExercises = allExercises.filter(ex => 
+          weakRules.includes(ex.ruleType) && 
+          selectedPrepositions.includes(ex.correctAnswer)
+        );
+        
+        if (selectedExercises.length < questionCount) {
+          const additionalExercises = allExercises
+            .filter(ex => 
+              !weakRules.includes(ex.ruleType) && 
+              selectedPrepositions.includes(ex.correctAnswer)
+            )
+            .sort(() => Math.random() - 0.5)
+            .slice(0, questionCount - selectedExercises.length);
+          
+          selectedExercises = [...selectedExercises, ...additionalExercises];
+        }
+        
+        setExercises(selectedExercises.sort(() => Math.random() - 0.5).slice(0, questionCount));
+      } else {
+        startExercises();
+      }
+    } catch (error) {
+      console.error('Failed to start smart training:', error);
+      startExercises();
+    }
+    setLoading(false);
+    setView('exercise');
+    setCurrentExercise(0);
+    setScore(0);
+    setAnswers([]);
+    setFeedback(null);
+    setShowHint(false);
   };
 
   const startExercises = () => {
@@ -254,7 +365,7 @@ export default function Index() {
               </CardContent>
             </Card>
 
-            <div className="grid md:grid-cols-4 gap-4">
+            <div className="grid md:grid-cols-5 gap-4">
               <Card className="hover-scale hover:shadow-lg transition-all cursor-pointer" onClick={() => setView('progress')}>
                 <CardHeader className="pb-3">
                   <Icon name="Target" size={32} className="text-purple-500 mb-2" />
@@ -262,6 +373,15 @@ export default function Index() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-gray-600 text-sm">Интерактивные задания</p>
+                </CardContent>
+              </Card>
+              <Card className="hover-scale hover:shadow-lg transition-all cursor-pointer" onClick={() => setView('weaknesses')}>
+                <CardHeader className="pb-3">
+                  <Icon name="AlertCircle" size={32} className="text-red-500 mb-2" />
+                  <CardTitle className="text-lg">Слабые места</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 text-sm">Анализ ошибок</p>
                 </CardContent>
               </Card>
               <Card className="hover-scale hover:shadow-lg transition-all cursor-pointer" onClick={() => setView('statistics')}>
@@ -374,13 +494,39 @@ export default function Index() {
                   </div>
                 </div>
 
+                <div className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
+                  smartMode ? 'bg-blue-100 border-blue-400' : 'bg-gray-50 border-gray-200'
+                }`} onClick={() => setSmartMode(!smartMode)}>
+                  <div className="flex items-center gap-3">
+                    <Checkbox 
+                      id="smart" 
+                      checked={smartMode}
+                      onCheckedChange={(checked) => setSmartMode(!!checked)}
+                    />
+                    <div className="flex-1">
+                      <Label htmlFor="smart" className="text-lg font-bold cursor-pointer flex items-center gap-2">
+                        <Icon name="Brain" size={20} />
+                        Умный режим
+                      </Label>
+                      <p className="text-sm text-gray-600 mt-1">Фокус на правилах, где больше ошибок</p>
+                    </div>
+                  </div>
+                </div>
+
                 <Button 
-                  onClick={startExercises}
+                  onClick={smartMode ? startSmartTraining : startExercises}
                   size="lg"
+                  disabled={loading}
                   className="w-full bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-lg py-6"
                 >
-                  <Icon name="Play" className="mr-2" />
-                  Начать ({questionCount} вопросов)
+                  {loading ? (
+                    <>Загрузка...</>
+                  ) : (
+                    <>
+                      <Icon name={smartMode ? "Brain" : "Play"} className="mr-2" />
+                      {smartMode ? 'Умная тренировка' : 'Начать'} ({questionCount} вопросов)
+                    </>
+                  )}
                 </Button>
               </CardContent>
             </Card>
@@ -649,6 +795,120 @@ export default function Index() {
                         </div>
                       </div>
                     ))}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+        )}
+
+        {view === 'weaknesses' && (
+          <div className="animate-fade-in">
+            <Button variant="ghost" onClick={() => setView('home')} className="mb-6">
+              <Icon name="ArrowLeft" className="mr-2" />
+              Назад
+            </Button>
+
+            <Card className="border-2 shadow-xl mb-6">
+              <CardHeader className="bg-gradient-to-r from-red-500 to-orange-500 text-white rounded-t-lg">
+                <CardTitle className="flex items-center gap-3">
+                  <Icon name="AlertCircle" size={28} />
+                  Слабые места - Анализ ошибок
+                </CardTitle>
+                <CardDescription className="text-red-100">
+                  Работай над правилами, где чаще всего ошибаешься
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="pt-6">
+                {loading ? (
+                  <div className="text-center py-8 text-gray-500">Загрузка...</div>
+                ) : ruleStats.length === 0 ? (
+                  <div className="text-center py-8 text-gray-500">
+                    <Icon name="CheckCircle2" size={48} className="mx-auto mb-4 text-gray-400" />
+                    <p className="mb-4">Пройди несколько тестов, чтобы увидеть анализ</p>
+                    <Button onClick={goToSettings} className="bg-gradient-to-r from-purple-500 to-blue-500">
+                      <Icon name="Play" className="mr-2" />
+                      Начать тренировку
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="space-y-6">
+                    <div>
+                      <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                        <Icon name="TrendingDown" className="text-red-500" />
+                        Правила требующие внимания:
+                      </h3>
+                      <div className="space-y-3">
+                        {ruleStats
+                          .filter(s => s.accuracy_percentage < 80)
+                          .slice(0, 8)
+                          .map((stat, index) => (
+                            <div key={index} className="p-4 bg-red-50 rounded-lg border-2 border-red-200">
+                              <div className="flex items-center justify-between mb-2">
+                                <div className="flex-1">
+                                  <p className="font-semibold text-gray-800">
+                                    {ruleTypeNames[stat.rule_type] || stat.rule_type}
+                                  </p>
+                                  <p className="text-sm text-gray-600 mt-1">
+                                    {stat.correct_attempts} из {stat.total_attempts} правильных попыток
+                                  </p>
+                                </div>
+                                <div className={`text-3xl font-bold ${
+                                  stat.accuracy_percentage >= 60 ? 'text-orange-600' : 'text-red-600'
+                                }`}>
+                                  {stat.accuracy_percentage}%
+                                </div>
+                              </div>
+                              <Progress value={stat.accuracy_percentage} className="h-2" />
+                            </div>
+                          ))}
+                      </div>
+                    </div>
+
+                    {ruleStats.filter(s => s.accuracy_percentage >= 80).length > 0 && (
+                      <div>
+                        <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                          <Icon name="CheckCircle2" className="text-green-500" />
+                          Освоенные правила:
+                        </h3>
+                        <div className="grid md:grid-cols-2 gap-3">
+                          {ruleStats
+                            .filter(s => s.accuracy_percentage >= 80)
+                            .map((stat, index) => (
+                              <div key={index} className="p-3 bg-green-50 rounded-lg border-2 border-green-200 flex items-center justify-between">
+                                <div className="flex-1">
+                                  <p className="font-medium text-gray-800 text-sm">
+                                    {ruleTypeNames[stat.rule_type] || stat.rule_type}
+                                  </p>
+                                  <p className="text-xs text-gray-600">
+                                    {stat.total_attempts} попыток
+                                  </p>
+                                </div>
+                                <div className="text-xl font-bold text-green-600">
+                                  {stat.accuracy_percentage}%
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="p-4 bg-blue-50 rounded-lg border-2 border-blue-200">
+                      <h3 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
+                        <Icon name="Lightbulb" size={20} />
+                        Рекомендация:
+                      </h3>
+                      <p className="text-blue-800 text-sm mb-3">
+                        Используй "Умный режим" в настройках для автоматического подбора упражнений на слабые правила
+                      </p>
+                      <Button 
+                        onClick={() => { setSmartMode(true); goToSettings(); }}
+                        className="bg-blue-500 hover:bg-blue-600"
+                      >
+                        <Icon name="Brain" className="mr-2" />
+                        Включить умный режим
+                      </Button>
+                    </div>
                   </div>
                 )}
               </CardContent>
