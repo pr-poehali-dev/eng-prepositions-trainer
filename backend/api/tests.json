@@ -1,0 +1,37 @@
+{
+  "tests": [
+    {
+      "name": "Get statistics - empty initially",
+      "method": "GET",
+      "query": "action=get_statistics",
+      "expectedStatus": 200,
+      "expectedBody": [],
+      "bodyMatcher": "type"
+    },
+    {
+      "name": "Save test result",
+      "method": "POST",
+      "query": "action=save_result",
+      "body": {
+        "total_questions": 10,
+        "correct_answers": 8,
+        "prepositions": ["at", "on", "in"],
+        "score_percentage": 80,
+        "answers": [
+          {"sentence": "Test", "correct": true, "answer": "at", "correctAnswer": "at"}
+        ]
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true,
+        "id": "number"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "OPTIONS request for CORS",
+      "method": "OPTIONS",
+      "expectedStatus": 200
+    }
+  ]
+}
